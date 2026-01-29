@@ -258,14 +258,14 @@
     </footer>
 
     <script>
-        // Reset Button
+
         document.getElementById('resetBtn').addEventListener('click', function() {
             document.getElementById('urlInput').value = '';
             document.getElementById('urlInput').focus();
             const qrCodeContainer = document.getElementById('qrCodeContainer');
             const codePlaceholder = document.getElementById('codePlaceholder');
             if (qrCodeContainer) {
-                qrCodeContainer.innerHTML = ''; // Clear the QR code
+                qrCodeContainer.innerHTML = ''; 
                 qrCodeContainer.classList.add('hidden');
             }
             if (codePlaceholder) {
@@ -285,7 +285,7 @@
             }
         });
 
-        // Download Button
+
         @if(isset($qr))
         document.getElementById('downloadBtn').addEventListener('click', function() {
             const svg = document.querySelector('#qrCodeContainer svg');
@@ -317,7 +317,7 @@
             }
         });
 
-        // Copy Button
+
         document.getElementById('copyBtn').addEventListener('click', async function() {
             const svg = document.querySelector('#qrCodeContainer svg');
             if (svg) {
