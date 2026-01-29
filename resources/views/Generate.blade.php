@@ -106,14 +106,14 @@
                                     d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
                             </svg>
                         </div>
-                        <input type="text" id="urlInput" name="url" value="{{ old('url') }}"
+                        <input type="text" id="urlInput" name="content" value="{{ old('content') }}"
                             class="w-full bg-input border border-border rounded-xl py-3.5 pl-12 pr-4 text-foreground placeholder-muted-foreground input-focus transition-all"
                             placeholder="https://example.com" required>
                     </div>
                     <p class="mt-2 text-xs text-muted-foreground">
                         Enter any URL, text, or data you want to encode
                     </p>
-                    @error('url')
+                    @error('content')
                         <p class="mt-2 text-xs text-red-500">{{ $message }}</p>
                     @enderror
                 </div>
@@ -260,7 +260,29 @@
     <script>
         // Reset Button
         document.getElementById('resetBtn').addEventListener('click', function() {
-            window.location.href = "{{ route('generate') }}";
+            document.getElementById('urlInput').value = '';
+            document.getElementById('urlInput').focus();
+            const qrCodeContainer = document.getElementById('qrCodeContainer');
+            const codePlaceholder = document.getElementById('codePlaceholder');
+            if (qrCodeContainer) {
+                qrCodeContainer.innerHTML = ''; // Clear the QR code
+                qrCodeContainer.classList.add('hidden');
+            }
+            if (codePlaceholder) {
+                codePlaceholder.classList.remove('hidden');
+            }
+            document.getElementById('downloadBtn').disabled = true;
+            document.getElementById('downloadBtn').classList.add('opacity-50', 'cursor-not-allowed');
+            document.getElementById('downloadBtn').classList.remove('bg-foreground');
+
+            document.getElementById('copyBtn').disabled = true;
+            document.getElementById('copyBtn').classList.add('opacity-50', 'cursor-not-allowed');
+            document.getElementById('copyBtn').classList.remove('bg-foreground');
+
+            const detailsSection = document.getElementById('detailsSection');
+            if (detailsSection) {
+                detailsSection.classList.add('hidden');
+            }
         });
 
         // Download Button

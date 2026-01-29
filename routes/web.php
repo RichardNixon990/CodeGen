@@ -15,5 +15,8 @@ use App\Http\Controllers\BarcodeController;
 */
 
 
-Route::post('/', [BarcodeController::class, 'index'])->name('generate');
-Route::post('/post', [BarcodeController::class, 'Generate'])->name('generate.post');
+Route::get('/', function () {
+    return view('Generate');
+})->name('generate.get');
+
+Route::post('/', [BarcodeController::class, 'Generate'])->name('generate.post');
